@@ -4,8 +4,6 @@ use log::{info,error};
 #[macro_use]
 mod arguments;
 
-use clap::{Arg, App};
-
 use arguments::Arguments;
 
 

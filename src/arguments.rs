@@ -7,6 +7,8 @@ use clap::{Arg, App};
 pub struct Arguments {
     host: String,
     port: u32,
+    zipfile: String,
+    folder: String,
 }
 
 impl Arguments {
@@ -14,6 +16,8 @@ impl Arguments {
         Arguments {
             host: "localhost".to_string(),
             port: 8080,
+            zipfile: "".to_string(),
+            folder: "".to_string(),
         }
     }
 
@@ -36,9 +40,21 @@ impl Arguments {
                 .value_name("HOST")
                 .help("Sets the host to serve on")
                 .takes_value(true))
+            .arg(Arg::with_name("zipfile")
+                .short("z")
+                .long("zipfile")
+                .value_name("ZIPFILE")
+                .help("Which zipfile to read in memory")
+                .takes_value(true))
+            .arg(Arg::with_name("folder")
+                .short("f")
+                .long("folder")
+                .value_name("FOLDER")
+                .help("Which folder to serve. This can not work together with the zipfile")
+                .takes_value(true))
+
             .get_matches();
 
-        // Gets a value for config if supplied by user, or defaults to "default.conf"
         if let Some(host) = matches.value_of("host") {
             info!("A host was passed: {}", host);
             args.host = host.to_string();
@@ -59,6 +75,14 @@ impl Arguments {
                 }
             }
         };
+
+        if let Some(folder) = matches.value_of("folder") {
+            info!("A folder was passed: {}", folder);
+            args.folder = folder.to_string();
+        } else if let Some(zipfile) = matches.value_of("zipfile") {
+            info!("A zipfile was passed: {}", zipfile);
+            args.zipfile = zipfile.to_string();
+        }
 
         return args;
     }
