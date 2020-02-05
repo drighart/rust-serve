@@ -1,0 +1,31 @@
+[package]
+name = "serve"
+version = "0.1.0"
+description = "Webserver which serves zip"
+readme = "README.md"
+homepage = "https://righart.net"
+documentation = "https://docs.rs/rust-serve"
+repository = "https://github.com/drighart/rust-serve"
+license = "MIT"
+authors = ["David Righart <david.righart@gmail.com>"]
+keywords = ["http", "cli", "webserver"]
+edition = "2018"
+
+[dependencies]
+hyper = "0.13.1"
+log = "0.4.8"
+env_logger = "0.7.1"
+bytes = "0.5"
+futures = "0.3"
+futures-util = "0.3"
+tokio = { version = "0.2.6", features = ["full"] }
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+reqwest = "0.9.22"
+clap = "2.33.0"
+
+[profile.release]
+lto = true
+panic = 'abort'
+opt-level = 'z'
