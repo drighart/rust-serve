@@ -5,18 +5,21 @@ use walkdir::WalkDir;
 
 #[macro_use]
 mod arguments;
+mod cache;
 
 use arguments::Arguments;
-
+use cache::Cache;
 
 fn main() {
     Builder::from_env(Env::default().default_filter_or("info")).init();
     info!("I will help you to serve...");
 
     let args = Arguments::new().parse();
-
     info!("{:?}", args);
-    read_folders2();
+
+    let cache = Cache::new().read_from_directory(&args.folder);
+
+//    read_folders2();
 }
 
 fn read_folders2() {

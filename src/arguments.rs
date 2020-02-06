@@ -8,7 +8,7 @@ pub struct Arguments {
     host: String,
     port: u32,
     zipfile: String,
-    folder: String,
+    pub folder: String,
 }
 
 impl Arguments {
@@ -17,7 +17,7 @@ impl Arguments {
             host: "localhost".to_string(),
             port: 8080,
             zipfile: "".to_string(),
-            folder: "".to_string(),
+            folder: "./data".to_string(),
         }
     }
 
